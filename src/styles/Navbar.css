@@ -1,0 +1,74 @@
+/* Navbar Styles */
+.nav {
+    position: fixed; /* Keeps the navbar fixed on the left */
+    top: 0;
+    left: 0;
+    height: 100vh; /* Full height of the viewport */
+    width: 200px; /* Set the width of the navbar */
+    background-color: #333; /* Background color */
+    color: white; /* Text color */
+    display: flex;
+    flex-direction: column; /* Align items in a column */
+    justify-content: center; /* Center contents vertically */
+    padding-top: 20px;
+}
+.active-link {
+    color: #ff5733;  /* Set the desired color for the active link */
+    font-weight: bold; /* Optional, makes it bold */
+}
+
+.nav__content {
+    display: flex;
+    flex-direction: column; /* Arrange the elements vertically */
+    justify-content: flex-start; /* Align items to the top */
+    height: 100%;
+}
+
+.nav__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px; /* Space below the logo */
+}
+
+.nav__logo-name {
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.nav__toggle {
+    display: none; /* Hide toggle for now, can be used for mobile view */
+}
+
+.nav__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the nav links horizontally */
+}
+
+.nav__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 10px 0;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.nav__link:hover {
+    background-color: #555;
+}
+
+.nav__link i {
+    margin-right: 10px; /* Space between icon and text */
+}
+
+/* Active link style */
+.nav__link.active-link {
+    background-color: #444;
+}

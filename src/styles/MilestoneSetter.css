@@ -1,0 +1,67 @@
+.milestone {
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    min-height: calc(100vh - 100px); /* Adjust height to fit between header and navbar */
+    box-sizing: border-box; /* Include padding in width/height calculations */
+}
+
+.milestone-setter {
+    width: 80%; /* Constrain content width */
+    text-align: center; /* Center text within the content */
+    margin: 0 auto; /* Center horizontally within the page */
+    padding: 20px; /* Add spacing around content */
+    box-sizing: border-box; /* Include padding in width/height calculations */
+    margin-left: 500px;
+}
+
+.milestone-form {
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px; /* Limit form width for better appearance */
+}
+
+.milestone-form input, .milestone-form textarea {
+    margin: 5px;
+    padding: 10px;
+    width: 100%; /* Inputs span the width of the form */
+    box-sizing: border-box; /* Include padding in width calculations */
+}
+
+.calendar {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px; /* Limit calendar width */
+    margin-top: 20px; /* Add spacing above calendar */
+    box-sizing: border-box; /* Include padding in width calculations */
+    margin-left: -100px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.calendar-day {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.calendar-day .event {
+    margin-top: 5px;
+    background: #f5f5f5;
+    padding: 5px;
+    border-radius: 3px;
+}

@@ -1,0 +1,1205 @@
+/* 
+.pomodoro-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px; 
+    padding: 20px;
+  }
+  
+  .pomodoro-timer {
+    font-size: 40px;
+    color: var(--title-primary-color);
+    font-weight: 700;
+    text-align: center;
+  }
+  
+  .pomodoro-controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .pomodoro-button {
+    background-color: var(--purple);
+    color: var(--title-primary-color);
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pomodoro-button:hover {
+    background-color: var(--yellow);
+  }
+  
+  .pomodoro-button.active {
+    background-color: var(--green);
+  }
+  
+  
+  .todo-list {
+    margin-top: 50px;
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .todo-list h2 {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--title-primary-color);
+    margin-bottom: 20px;
+  }
+  
+  .todo-list ul {
+    padding: 0;
+  }
+  
+  .todo-list li {
+    background-color: var(--container-color);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;
+  }
+  
+  .todo-list li span {
+    font-size: 16px;
+    color: var(--text-color);
+  }
+  
+  .todo-list .task-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .todo-list .task-actions button {
+    background-color: var(--purple);
+    color: var(--title-primary-color);
+    border-radius: 5px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .todo-list .task-actions button:hover {
+    background-color: var(--yellow);
+  }
+  
+  
+  .matrix-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+  }
+  
+  .matrix-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .matrix-cell {
+    background-color: var(--purple-secondary);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--title-primary-color);
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  .matrix-cell.high-priority {
+    background-color: var(--red);
+  }
+  
+  .matrix-cell.low-priority {
+    background-color: var(--green);
+  }
+  
+  
+  .user-profile {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .profile-card {
+    background-color: var(--purple);
+    color: var(--title-primary-color);
+    padding: 20px;
+    border-radius: 15px;
+    width: 300px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  }
+  
+  .profile-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+  }
+  
+  .profile-card h3 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  .profile-card p {
+    font-size: 14px;
+    margin-top: 10px;
+    color: var(--text-color);
+  }
+  
+  .profile-card .edit-button {
+    margin-top: 15px;
+    padding: 8px 20px;
+    border-radius: 10px;
+    background-color: var(--yellow);
+    color: var(--title-primary-color);
+    cursor: pointer;
+    font-weight: 600;
+  }
+  
+  .profile-card .edit-button:hover {
+    background-color: var(--green);
+  }
+   */
+
+   /* General Reset */
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Arial", sans-serif;
+    background-color: var(--dark-background, #1f1f1f);
+    color: var(--text-color, #ffffff);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  
+  
+  .pomodoro-timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  #circularProgressBar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: conic-gradient(
+      var(--blue, #4caf50) 0deg,
+      var(--purple, #3f3f3f) 0deg
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .progress-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--text-color, #ffffff);
+  }
+  
+  .timer-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .timer-buttons button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .timer-buttons button.active {
+    background-color: var(--blue, #4caf50);
+    color: var(--dark-background, #1f1f1f);
+  }
+  
+  .timer-buttons button:not(.active) {
+    background-color: var(--purple, #3f3f3f);
+    color: var(--text-color, #ffffff);
+  }
+  
+  .control-buttons {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .control-buttons button {
+    background-color: var(--dark-background, #1f1f1f);
+    color: var(--blue, #4caf50);
+    border: 1px solid var(--blue, #4caf50);
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .control-buttons button:hover {
+    background-color: var(--blue, #4caf50);
+    color: var(--dark-background, #1f1f1f);
+  }
+  
+  
+  .todo-list {
+    margin-top: 30px;
+    width: 300px;
+  }
+  
+  .todo-list input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--blue, #4caf50);
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    background-color: var(--dark-background, #1f1f1f);
+    color: var(--text-color, #ffffff);
+  }
+  
+  .todo-list button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--blue, #4caf50);
+    color: var(--dark-background, #1f1f1f);
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .todo-list button:hover {
+    background-color: var(--purple, #3f3f3f);
+    color: var(--text-color, #ffffff);
+  }
+  
+  #listto {
+    list-style: none;
+    margin-top: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 0;
+  }
+  
+  #listto li {
+    background-color: var(--purple, #3f3f3f);
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  #listto li.checked {
+    text-decoration: line-through;
+    background-color: var(--blue, #4caf50);
+    color: var(--dark-background, #1f1f1f);
+  }
+  
+  #listto li span {
+    cursor: pointer;
+    color: var(--text-color, #ffffff);
+  }
+  
+  #listto li span:hover {
+    color: var(--blue, #4caf50);
+  }
+  
+  
+  @media (max-width: 600px) {
+    #circularProgressBar {
+      width: 150px;
+      height: 150px;
+    }
+  
+    .progress-value {
+      font-size: 1.5rem;
+    }
+  
+    .todo-list {
+      width: 100%;
+    }
+  
+    .timer-buttons button,
+    .control-buttons button {
+      font-size: 0.9rem;
+    }
+  }
+   */
+
+   /* :root {
+    --blue: #4a90e2;
+    --purple: #9b59b6;
+    --text-color: #333;
+    --dark-background: #2c3e50;
+}
+
+body {
+    background-color: var(--dark-background);
+    color: var(--text-color);
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.nav {
+    background-color: var(--dark-background);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.nav__content {
+    width: 100%;
+    text-align: center;
+}
+
+.nav__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.nav__logo-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.nav__list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.nav__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.nav__link.active-link {
+    background-color: var(--blue);
+}
+
+.nav__link:hover {
+    background-color: var(--purple);
+}
+
+.nav__name {
+    margin-left: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--dark-background);
+    color: white;
+}
+
+.left img, .middle img, .right img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.radio-btn {
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border-radius: 50%;
+    position: relative;
+}
+
+.radio-btn .radio-inner {
+    width: 10px;
+    height: 10px;
+    background-color: var(--blue);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.search, .noti {
+    margin-left: 20px;
+    width: 30px;
+    height: 30px;
+}
+
+.streaks_count {
+    display: flex;
+    align-items: center;
+}
+
+.streaks_count span {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.userpp {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.pomodoro-timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#circularProgressBar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 10px solid var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--blue);
+}
+
+.timer-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.timer-buttons button {
+    background-color: var(--blue);
+    color: white;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.timer-buttons button.active {
+    background-color: var(--purple);
+}
+
+.control-buttons {
+    margin-top: 20px;
+}
+
+.control-buttons button {
+    background-color: var(--purple);
+    color: white;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+#input-box {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 300px;
+    border: 1px solid var(--blue);
+    border-radius: 5px;
+}
+
+button {
+    background-color: var(--blue);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+ul#listto {
+    list-style: none;
+    padding: 0;
+    width: 300px;
+    text-align: left;
+}
+
+ul#listto li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid var(--blue);
+}
+
+ul#listto li span {
+    cursor: pointer;
+    color: var(--blue);
+}
+
+ul#listto li span:hover {
+    color: var(--purple);
+}
+button.active {
+    background-color: var(--blue); 
+    color: #fff;
+  }
+   */
+
+   :root {
+    --blue: #4a90e2;
+    --purple: #9b59b6;
+    --text-color: #333;
+    --dark-background: #2c3e50;
+}
+/* General reset and global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.home-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main-container {
+    display: flex;
+    flex: 1;
+}
+
+.home-content {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    gap: 20px;
+}
+
+.left-side {
+    flex: 1; /* Adjust this value to change the width */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.right-side {
+    flex: 2; /* Adjust this value to change the width */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Optional: Style TodoList and Pomodoro Timer as needed */
+.todo-list {
+    margin: 20px;
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    width: 50%;
+    padding: 3px;
+    background-color: #3f67ca;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  #listto {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #listto li {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  #listto li input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--dark-background);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Home container to manage layout */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Header styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--dark-background);
+    color: white;
+    width: 1200px;
+    margin-top: 0;
+}
+
+/* Main container with Navbar and content */
+.main-container {
+    display: flex;
+    flex: 1;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: var(--dark-background);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav__list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.nav__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.nav__link:hover {
+    background-color: var(--purple);
+}
+
+.nav__name {
+    margin-left: 10px;
+}
+
+/* Home content area */
+.home-content {
+    margin-left: 250px; /* To make room for the navbar */
+    padding: 20px;
+    width: calc(100% - 250px); /* Ensure the content doesn't overlap with the navbar */
+    flex: 1;
+    overflow: auto;
+}
+
+/* Pomodoro timer styles */
+.pomodoro-timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#circularProgressBar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 10px solid var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--blue);
+}
+
+.timer-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.timer-buttons button {
+    background-color: var(--blue);
+    color: white;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.timer-buttons button.active {
+    background-color: var(--purple);
+}
+
+.control-buttons {
+    margin-top: 20px;
+}
+
+.control-buttons button {
+    background-color: var(--purple);
+    color: white;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-buttons button:hover {
+    background-color: var(--blue);
+    color: var(--dark-background);
+}
+
+
+body {
+    background-color: var(--dark-background);
+    color: var(--text-color);
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.nav {
+    background-color: var(--dark-background);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.nav__content {
+    width: 100%;
+    text-align: center;
+}
+
+.nav__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.nav__logo-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.nav__list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.nav__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.nav__link.active-link {
+    background-color: var(--blue);
+}
+
+.nav__link:hover {
+    background-color: var(--purple);
+}
+
+.nav__name {
+    margin-left: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--dark-background);
+    color: white;
+}
+
+.left img, .middle img, .right img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.radio-btn {
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border-radius: 50%;
+    position: relative;
+}
+
+.radio-btn .radio-inner {
+    width: 10px;
+    height: 10px;
+    background-color: var(--blue);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.search, .noti {
+    margin-left: 20px;
+    width: 30px;
+    height: 30px;
+}
+
+.streaks_count {
+    display: flex;
+    align-items: center;
+}
+
+.streaks_count span {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.userpp {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.pomodoro-timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#circularProgressBar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 10px solid var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--blue);
+}
+
+.timer-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.timer-buttons button {
+    background-color: var(--blue);
+    color: white;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.timer-buttons button.active {
+    background-color: var(--purple);
+}
+
+.control-buttons {
+    margin-top: 20px;
+}
+
+.control-buttons button {
+    background-color: var(--purple);
+    color: white;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-buttons button:hover {
+    background-color: var(--blue);
+    color: var(--dark-background);
+}
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+#input-box {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 300px;
+    border: 1px solid var(--blue);
+    border-radius: 5px;
+}
+
+button {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+ul#listto {
+    list-style: none;
+    padding: 0;
+    width: 300px;
+    text-align: left;
+}
+
+ul#listto li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid var(--blue);
+}
+
+ul#listto li span {
+    cursor: pointer;
+    color: var(--blue);
+}
+
+ul#listto li span:hover {
+    color: var(--purple);
+}
+
+ul#listto li.checked {
+    text-decoration: line-through;
+    background-color: var(--blue);
+    color: var(--dark-background);
+}
+
+@media (max-width: 600px) {
+    #circularProgressBar {
+        width: 120px;
+        height: 120px;
+    }
+
+    .progress-value {
+        font-size: 1.5rem;
+    }
+
+    .todo-list {
+        width: 100%;
+    }
+
+    .timer-buttons button,
+    .control-buttons button {
+        font-size: 0.9rem;
+    }
+}
+:root {
+    --blue: #007bff; /* Pomodoro active color */
+    --purple: #6f42c1; /* Break active color */
+    --text-color: #ffffff; /* Text color */
+    --dark-background: #212529; /* Background color */
+  }
+  
+  body {
+    background-color: var(--dark-background);
+    font-family: Arial, sans-serif;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .pomodoro-timer {
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(180, 129, 227);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 300px;
+  }
+  
+  .timer-buttons {
+    margin-bottom: 20px;
+  }
+  
+  .timer-buttons button {
+    background-color: rgb(140, 50, 213);
+    color: white;
+    border: 2px solid var(--text-color);
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .timer-buttons button.active {
+    background-color: #7128cb;
+    color: white;
+  }
+  
+  .timer-buttons button:hover {
+    background-color: var(--purple);
+    color: var(--dark-background);
+  }
+  
+  .control-buttons {
+    margin-top: 20px;
+  }
+  
+  .control-buttons button {
+    background-color: #7128cb;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .control-buttons button:disabled {
+    background-color: #7128cb;
+    cursor: not-allowed;
+  }
+  
+  .control-buttons button:hover {
+    background-color: var(--purple);
+  }
+  
+  #circularProgressBar {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 20px auto;
+    background: conic-gradient(var(--blue) 0deg, var(--purple) 0deg);
+  }
+  
+  .progress-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: white;
+  }
+  
+  @media (max-width: 400px) {
+    .pomodoro-timer {
+      width: 80%;
+    }
+  
+    .control-buttons button,
+    .timer-buttons button {
+      font-size: 14px;
+    }
+  }
+  
