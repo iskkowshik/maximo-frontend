@@ -48,7 +48,8 @@ li{
 
 
 .scroll1-cover{
-    background-image: url("C:\Users\admin\maximo-mern\frontend\public\Icons\cover.jpeg") ;
+   background-image: url("/Icons/cover.jpeg");
+
     background-repeat: no-repeat;
     background-attachment: scroll;
 
