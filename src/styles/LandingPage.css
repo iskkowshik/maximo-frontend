@@ -48,7 +48,9 @@ li{
 
 
 .scroll1-cover{
-  
+  background-image: url("/vercel/path0/public/Icons/cover.jpeg");
+
+    background-repeat: no-repeat;
     background-attachment: scroll;
 
     background-size :100%;
