@@ -2,51 +2,59 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/home.css";
 
-const TodoList = () => {
-  const [task, setTask] = useState("");  // State to store input text for new task
-  const [tasks, setTasks] = useState([]);  // State to store the list of tasks
+// 🌐 Live API base URL
+const API_URL = "http://51.20.54.109:5000/api/tasks";
 
-  // Fetch tasks from the backend when the component mounts
+const TodoList = () => {
+  const [task, setTask] = useState("");
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
   const fetchTasks = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/tasks");  // Backend URL to fetch tasks
-      setTasks(response.data);  // Set tasks to state
+      const response = await axios.get(API_URL);
+      setTasks(response.data);
     } catch (error) {
-      console.error("Error fetching tasks:", error);
+      console.error("❌ Error fetching tasks:", error);
+      alert("Failed to fetch tasks. Check server.");
     }
   };
 
-  // Add a new task
   const addTask = async () => {
     if (!task.trim()) {
       alert("Write something before adding!");
       return;
     }
 
+    setLoading(true);
     try {
-      // Send POST request to the backend to create a new task
-      const response = await axios.post("http://localhost:5000/api/tasks", { text: task });
-      setTasks([...tasks, response.data]);  // Add new task to state
-      setTask("");  // Clear the input field
+      const response = await axios.post(API_URL, { text: task });
+      setTasks([...tasks, response.data]);
+      setTask("");
     } catch (error) {
-      console.error("Error adding task:", error);
+      console.error("❌ Error adding task:", error);
+      alert("Failed to add task.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Delete a task
   const deleteTask = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this task?");
+    if (!confirmDelete) return;
+
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`);  // Send DELETE request to backend
-      setTasks(tasks.filter((t) => t._id !== id));  // Remove deleted task from state
+      await axios.delete(`${API_URL}/${id}`);
+      setTasks(tasks.filter((t) => t._id !== id));
     } catch (error) {
-      console.error("Error deleting task:", error);
+      console.error("❌ Error deleting task:", error);
+      alert("Failed to delete task.");
     }
   };
-
-  // Fetch tasks when the component is mounted
-  useEffect(() => {
-    fetchTasks();
-  }, []);
 
   return (
     <div className="todo-list">
@@ -54,15 +62,19 @@ const TodoList = () => {
         type="text"
         id="input-box"
         value={task}
-        onChange={(e) => setTask(e.target.value)}  // Update task state as user types
+        onChange={(e) => setTask(e.target.value)}
         placeholder="Add a task..."
+        onKeyDown={(e) => e.key === "Enter" && addTask()}
       />
-      <button onClick={addTask}>Add Task</button>
+      <button onClick={addTask} disabled={loading}>
+        {loading ? "Adding..." : "Add Task"}
+      </button>
+
       <ul id="listto">
         {tasks.map((t) => (
           <li key={t._id}>
-            <input type="checkbox" onClick={() => deleteTask(t._id)} />  {/* Checkbox to delete task */}
             {t.text}
+            <button onClick={() => deleteTask(t._id)} className="delete-btn">🗑️</button>
           </li>
         ))}
       </ul>

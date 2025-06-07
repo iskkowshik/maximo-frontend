@@ -12,7 +12,7 @@ const SignupPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/auth/signup', {
+      const response = await fetch('http://51.20.54.109:5000/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password })
@@ -23,7 +23,7 @@ const SignupPage = () => {
         alert('Signup successful! Please login.');
         navigate('/login');
       } else {
-        setError(data.message);
+        setError(data.message || 'Signup failed');
       }
     } catch (err) {
       console.error('Error signing up:', err);

@@ -1,21 +1,19 @@
-// src/pages/ProfilePage.js
-
 import React, { useState, useEffect } from 'react';
-import '../styles/ProfilePage.css'; // Style it as needed
+import '../styles/ProfilePage.css';
+import axios from 'axios';
 
-import axios from 'axios';  // For making HTTP requests
+const BASE_URL = 'http://51.20.54.109:5000';  // Your deployed backend
 
 const ProfilePage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userId] = useState(localStorage.getItem('userId')); 
+  const [userId] = useState(localStorage.getItem('userId'));
 
   useEffect(() => {
-    // Fetch current profile data on component mount
     const fetchUserProfile = async () => {
       try {
-        const response = await axios.get(`/api/auth/${userId}`);
+        const response = await axios.get(`${BASE_URL}/api/auth/${userId}`);
         const userData = response.data;
         setName(userData.name);
         setEmail(userData.email);
@@ -31,15 +29,15 @@ const ProfilePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
+    const token = localStorage.getItem('token');
 
     try {
       const response = await axios.put(
-        '/api/auth/profile',
+        `${BASE_URL}/api/auth/profile`,
         {
           name,
           email,
-          password, // Only include password if it's updated
+          password,
         },
         {
           headers: {
@@ -47,7 +45,7 @@ const ProfilePage = () => {
           },
         }
       );
-  
+
       if (response.status === 200) {
         alert('Profile updated successfully');
       }
@@ -56,6 +54,7 @@ const ProfilePage = () => {
       alert('Failed to update profile');
     }
   };
+
   return (
     <div className="profile-page">
       <h2>Edit Profile</h2>
